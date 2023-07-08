@@ -1,4 +1,6 @@
-package com.arjenzhou.kit.fsm;
+package com.arjenzhou.kit.fsm.internal;
+
+import com.arjenzhou.kit.fsm.MealyInput;
 
 /**
  * FSM Transition

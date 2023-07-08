@@ -1,5 +1,7 @@
-package com.arjenzhou.kit.fsm;
+package test.com.arjenzhou.kit.fsm;
 
+import com.arjenzhou.kit.fsm.MealyInput;
+import com.arjenzhou.kit.fsm.MealyMachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +54,6 @@ public class MealyStateMachineTest {
                         (event, input) -> AccountEvent.LOGIN.equals(event),
                         input -> true
                 );
-        ;
     }
 
     @Test

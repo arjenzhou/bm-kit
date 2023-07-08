@@ -18,7 +18,7 @@ public interface TriFunction<T, U, V, R> {
      * @param t first arg
      * @param u second arg
      * @param v third arg
-     * @return
+     * @return the function result
      */
     R apply(T t, U u, V v);
 

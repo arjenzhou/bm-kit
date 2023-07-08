@@ -1,6 +1,7 @@
 package com.arjenzhou.kit.fsm;
 
 import com.arjenzhou.kit.base.util.CollectionUtil;
+import com.arjenzhou.kit.fsm.internal.MealyTransition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class MealyMachine<S> {
      * @param input        to trigger state transfer
      * @return state after triggered
      */
-    S trigger(S currentState, MealyInput input) {
+    public S trigger(S currentState, MealyInput input) {
         List<MealyTransition<S>> transitions = transitionMap.get(currentState);
         if (CollectionUtil.isEmpty(transitions)) {
             throw new MealyException(currentState.getClass() + " has no transitions.");

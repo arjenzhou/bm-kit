@@ -31,6 +31,9 @@ subprojects {
     java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
     dependencies {
+        implementation("org.slf4j:slf4j-api:${project.property("slf4j.version")}")
+        implementation("org.slf4j:slf4j-simple:${project.property("slf4j.version")}")
+
         testImplementation(platform("org.junit:junit-bom:${project.property("junit-bom.version")}"))
         testImplementation("org.junit.jupiter:junit-jupiter")
     }

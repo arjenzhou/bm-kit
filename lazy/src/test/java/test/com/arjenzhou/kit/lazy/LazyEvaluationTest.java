@@ -1,5 +1,6 @@
-package com.arjenzhou.kit.lazy;
+package test.com.arjenzhou.kit.lazy;
 
+import com.arjenzhou.kit.lazy.Lazy;
 import org.junit.jupiter.api.Test;
 
 import java.util.function.BinaryOperator;

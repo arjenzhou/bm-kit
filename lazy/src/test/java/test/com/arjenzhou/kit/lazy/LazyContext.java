@@ -1,7 +1,8 @@
-package com.arjenzhou.kit.lazy;
+package test.com.arjenzhou.kit.lazy;
 
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
+import com.arjenzhou.kit.lazy.Lazy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.function.BinaryOperator;
 
@@ -27,7 +28,7 @@ public class LazyContext {
 
     String sleepAndLog(String value, int second) {
         sleep(second);
-        LOG.info(() -> String.format("[%s] %s at %d", Thread.currentThread().getName(), value, System.currentTimeMillis() - start.get()));
+        LOG.info("[{}] {} at {}", Thread.currentThread().getName(), value, System.currentTimeMillis() - start.get());
         return value;
     }
 

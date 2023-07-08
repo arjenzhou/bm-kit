@@ -1,4 +1,4 @@
-package com.arjenzhou.kit.fsm;
+package test.com.arjenzhou.kit.fsm;
 
 /**
  * @author bm-kit@arjenzhou.com
