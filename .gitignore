@@ -45,3 +45,4 @@ gradlew.bat
 **/build/
 !src/**/build/
 /gradle/
+/coverage/

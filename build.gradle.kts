@@ -5,6 +5,17 @@ plugins {
     id("signing")
 }
 
+jacoco {
+    toolVersion = project.property("jcoco.version") as String
+}
+
+tasks {
+    wrapper {
+        gradleVersion = project.property("gradle.wrapper.version") as String
+        distributionType = Wrapper.DistributionType.ALL
+    }
+}
+
 allprojects {
     repositories {
         mavenCentral()
@@ -23,9 +34,24 @@ subprojects {
         testImplementation(platform("org.junit:junit-bom:${project.property("junit-bom.version")}"))
         testImplementation("org.junit.jupiter:junit-jupiter")
     }
+
     tasks {
         test {
             useJUnitPlatform()
+        }
+        jacocoTestReport {
+            reports {
+                xml.required.set(true)
+                csv.required.set(false)
+                html.required.set(false)
+                xml.outputLocation.set(File("$rootDir/coverage/reports/${project.name}.xml"))
+            }
+            dependsOn(test)
+        }
+        javadoc {
+            if (JavaVersion.current().isJava9Compatible) {
+                (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
+            }
         }
     }
 
@@ -47,31 +73,6 @@ subprojects {
                     password = System.getenv("GITHUB_TOKEN")
                 }
             }
-        }
-    }
-}
-
-jacoco {
-    toolVersion = project.property("jcoco.version") as String
-}
-
-tasks {
-    wrapper {
-        gradleVersion = project.property("gradle.wrapper.version") as String
-        distributionType = Wrapper.DistributionType.ALL
-    }
-    jacocoTestReport {
-        reports {
-            xml.required.set(false)
-            csv.required.set(false)
-            html.required.set(true)
-            html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
-        }
-        dependsOn(test)
-    }
-    javadoc {
-        if (JavaVersion.current().isJava9Compatible) {
-            (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
         }
     }
 }
