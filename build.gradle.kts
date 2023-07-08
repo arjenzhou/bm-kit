@@ -44,7 +44,7 @@ subprojects {
                 xml.required.set(true)
                 csv.required.set(false)
                 html.required.set(false)
-                xml.outputLocation.set(File("$rootDir/coverage/reports/${project.name}.xml"))
+                xml.outputLocation.set(File("$projectDir/build/reports/coverage/jacoco-${project.name}.xml"))
             }
             dependsOn(test)
         }
