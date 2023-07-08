@@ -1,4 +1,4 @@
-package com.arjenzhou.kit.base;
+package com.arjenzhou.kit.base.util;
 
 import java.util.Collection;
 

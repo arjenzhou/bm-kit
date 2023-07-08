@@ -1,6 +1,6 @@
 package com.arjenzhou.kit.fsm;
 
-import com.arjenzhou.kit.base.CollectionUtil;
+import com.arjenzhou.kit.base.util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
