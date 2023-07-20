@@ -1,8 +1,8 @@
 plugins {
-    id("java")
+    id("java-library")
     id("jacoco")
-    id("maven-publish")
     id("signing")
+    id("maven-publish")
 }
 
 jacoco {
@@ -25,8 +25,8 @@ allprojects {
 subprojects {
     apply(plugin = "java-library")
     apply(plugin = "jacoco")
-    apply(plugin = "maven-publish")
     apply(plugin = "signing")
+    apply(plugin = "maven-publish")
 
     java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -62,7 +62,7 @@ subprojects {
         publications {
             register<MavenPublication>("gpr") {
                 groupId = project.property("group.id") as String
-                artifactId = project.name
+                artifactId = project.property("artifact.id") as String + "-" + project.name
                 version = project.property("project.version") as String
                 from(components["java"])
             }
@@ -74,6 +74,17 @@ subprojects {
                 credentials {
                     username = System.getenv("GITHUB_ACTOR")
                     password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+
+            maven {
+                name = "OSSRH"
+                val releasesRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+                credentials {
+                    username = System.getenv("MAVEN_USERNAME")
+                    password = System.getenv("MAVEN_PASSWORD")
                 }
             }
         }
