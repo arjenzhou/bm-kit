@@ -36,6 +36,7 @@ subprojects {
 
         testImplementation(platform("org.junit:junit-bom:${project.property("junit-bom.version")}"))
         testImplementation("org.junit.jupiter:junit-jupiter")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
 
     tasks {
@@ -51,20 +52,23 @@ subprojects {
             }
             dependsOn(test)
         }
-        javadoc {
-            if (JavaVersion.current().isJava9Compatible) {
-                (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
-            }
-        }
+    }
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
     }
 
     publishing {
         publications {
-            register<MavenPublication>("gpr") {
+            register<MavenPublication>(project.property("artifact.id") as String) {
                 groupId = project.property("group.id") as String
                 artifactId = project.property("artifact.id") as String + "-" + project.name
                 version = project.property("project.version") as String
                 from(components["java"])
+                signing {
+                    sign(this@register)
+                }
             }
         }
         repositories {
@@ -79,9 +83,10 @@ subprojects {
 
             maven {
                 name = "OSSRH"
-                val releasesRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-                val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-                url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+                val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                val isSnapshots = project.property("project.version").toString().endsWith("SNAPSHOT")
+                url = if (isSnapshots) snapshotsRepoUrl else releasesRepoUrl
                 credentials {
                     username = System.getenv("MAVEN_USERNAME")
                     password = System.getenv("MAVEN_PASSWORD")
