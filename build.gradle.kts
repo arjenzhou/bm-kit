@@ -69,6 +69,29 @@ subprojects {
                 signing {
                     sign(this@register)
                 }
+                pom {
+                    name.set(artifactId)
+                    description.set("bm's $artifactId tool kit.")
+                    url.set(project.property("project.url") as String)
+                    licenses {
+                        license {
+                            name.set("The MIT License")
+                            url.set("https://opensource.org/license/mit/")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("arjenzhou")
+                            name.set("Zhou Yang")
+                            email.set("$artifactId@arjenzhou.com")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:git@github.com:arjenzhou/bm-kit.git")
+                        developerConnection.set("scm:git:git@github.com:arjenzhou/bm-kit.git")
+                        url.set(project.property("project.url") as String)
+                    }
+                }
             }
         }
         repositories {
