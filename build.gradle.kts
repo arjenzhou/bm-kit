@@ -3,6 +3,8 @@ plugins {
     id("jacoco")
     id("signing")
     id("maven-publish")
+    // cannot read variable in plugins
+    id("org.gradlex.extra-java-module-info") version "1.4.1"
 }
 
 jacoco {
