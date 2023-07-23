@@ -41,7 +41,8 @@ public class JobRunner implements Job {
                 }
                 scheduledJob.start();
                 LOG.info("Job " + scheduledJob.getClass().getTypeName() + " triggered by instanceId: " + context.getFireInstanceId() + " has completed");
-            } catch (ParseException ignored) {
+            } catch (ParseException e) {
+                LOG.error("Job " + scheduledJob.getClass().getTypeName() + " parse expression failed", e);
             }
         });
     }

@@ -1,2 +1,3 @@
 test.com.arjenzhou.kit.scheduler.LogTimeJob
 test.com.arjenzhou.kit.scheduler.CalculationJob
+test.com.arjenzhou.kit.scheduler.ParseFailedJob
