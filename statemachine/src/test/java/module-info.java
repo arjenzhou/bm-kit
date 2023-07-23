@@ -2,9 +2,9 @@
  * @author bm-kit@arjenzhou.com
  * @since 2023/7/8
  */
-module bm.kit.statemachine.test {
+module test.com.arjenzhou.kit.fsm {
     exports test.com.arjenzhou.kit.fsm;
 
     requires org.junit.jupiter.api;
-    requires bm.kit.statemachine.main;
+    requires com.arjenzhou.kit.fsm;
 }

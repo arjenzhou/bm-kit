@@ -8,7 +8,7 @@ import java.util.Date;
  * @author bm-kit@arjenzhou.com
  * @since 2023/7/23
  */
-public abstract class InMemorySchedulerJob implements ScheduledJob {
+public abstract class MemorySchedulerJob implements ScheduledJob {
     /**
      * the last time this job completed.
      */

@@ -6,10 +6,10 @@ import test.com.arjenzhou.kit.scheduler.LogTimeJob;
  * @author bm-kit@arjenzhou.com
  * @since 2023/7/23
  */
-module bm.kit.scheduler.test {
+module test.com.arjenzhou.kit.scheduler {
     exports test.com.arjenzhou.kit.scheduler;
 
-    requires bm.kit.scheduler.main;
+    requires com.arjenzhou.kit.scheduler;
     requires org.slf4j;
     requires org.junit.jupiter.api;
 
