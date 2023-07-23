@@ -1,5 +1,6 @@
 package com.arjenzhou.kit.scheduler.job.internal;
 
+import com.arjenzhou.kit.scheduler.job.Scheduled;
 import com.arjenzhou.kit.scheduler.job.ScheduledJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  * @since 2023/7/23
  */
 public class JobHolder {
-    private static final Logger LOG = LoggerFactory.getLogger("JOB FACTORY");
+    private static final Logger LOG = LoggerFactory.getLogger("JOB HOLDER");
     /**
      * All jobs instances
      */
@@ -24,11 +25,20 @@ public class JobHolder {
 
     static {
         ServiceLoader<ScheduledJob> jobServiceLoader = ServiceLoader.load(ScheduledJob.class);
-        SCHEDULED_JOBS = jobServiceLoader.stream().map(ServiceLoader.Provider::get).toList();
+        SCHEDULED_JOBS = jobServiceLoader.stream()
+                .map(ServiceLoader.Provider::get)
+                .filter(j -> j.getClass().getAnnotation(Scheduled.class) != null)
+                .toList();
         String loadedJobs = SCHEDULED_JOBS.stream().map(j -> j.getClass().getTypeName()).collect(Collectors.joining("\n"));
-        LOG.info("load " + SCHEDULED_JOBS.size() + " jobs: \n" + loadedJobs);
-        LOG.info("check whether your service is declared in /META-INF/serivces/com.arjenzhou.kit.scheduler.job.ScheduledJob, " +
-                "or provides with com.arjenzhou.kit.scheduler.job.ScheduledJob or not.");
+        LOG.info("""
+                load %s jobs:
+                %s
+                
+                When your service were not loaded properly, please check as follows:
+                1. whether your service is declared in /META-INF/services/com.arjenzhou.kit.scheduler.job.ScheduledJob
+                2. whether your service is annotated with com.arjenzhou.kit.scheduler.job.Scheduled
+                3. whether your service is provided as com.arjenzhou.kit.scheduler.job.ScheduledJob in module-info if you are using it under JPMS
+                """.formatted(SCHEDULED_JOBS.size(), loadedJobs));
     }
 
     /**

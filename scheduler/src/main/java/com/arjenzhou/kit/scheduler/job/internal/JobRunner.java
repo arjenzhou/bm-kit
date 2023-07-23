@@ -27,7 +27,7 @@ public class JobRunner implements Job {
 
     @Override
     public void execute(JobExecutionContext context) {
-        Date now = new Date();
+        Date scheduledFireTime = context.getScheduledFireTime();
         JobHolder.getAllJobs().forEach(scheduledJob -> {
             Scheduled scheduled = scheduledJob.getClass().getAnnotation(Scheduled.class);
             String expression = scheduled.cronExpression();
@@ -36,11 +36,11 @@ public class JobRunner implements Job {
                 Date lastRunTime = scheduledJob.getLastRunTime();
                 Date nextValidTimeAfterLastRun = cronExpression.getNextValidTimeAfter(lastRunTime);
                 // it is not the time to start this job
-                if (nextValidTimeAfterLastRun.after(now)) {
+                if (nextValidTimeAfterLastRun.after(scheduledFireTime)) {
                     return;
                 }
                 scheduledJob.start();
-                LOG.info("Job " + scheduledJob.getClass().getTypeName() + " started");
+                LOG.info("Job " + scheduledJob.getClass().getTypeName() + " triggered by instanceId: " + context.getFireInstanceId() + " has completed");
             } catch (ParseException ignored) {
             }
         });

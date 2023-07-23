@@ -13,9 +13,9 @@ import java.util.Date;
  * @author bm-kit@arjenzhou.com
  * @since 2023/7/23
  */
-@Scheduled(cronExpression = "*/5 * * * * ?")
-public class TestJob extends InMemorySchedulerJob {
-    private static final Logger LOG = LoggerFactory.getLogger(TestJob.class);
+@Scheduled(cronExpression = "0/5 * * * * ?")
+public class LogTimeJob extends InMemorySchedulerJob {
+    private static final Logger LOG = LoggerFactory.getLogger(LogTimeJob.class);
 
     @Override
     public void execute() {

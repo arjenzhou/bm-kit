@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 public @interface Scheduled {
     /**
-     * the quartz cron expression
+     * @return the quartz cron expression, runs on every day by default
      */
-    String cronExpression();
+    String cronExpression() default "* * * 0/1 * ?";
 }
