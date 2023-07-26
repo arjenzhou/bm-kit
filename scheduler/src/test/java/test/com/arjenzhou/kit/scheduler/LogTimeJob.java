@@ -1,6 +1,6 @@
 package test.com.arjenzhou.kit.scheduler;
 
-import com.arjenzhou.kit.scheduler.job.MemorySchedulerJob;
+import com.arjenzhou.kit.scheduler.job.MemoryScheduledJob;
 import com.arjenzhou.kit.scheduler.job.Scheduled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import java.util.Date;
  * @since 2023/7/23
  */
 @Scheduled(cronExpression = "0/5 * * * * ?")
-public class LogTimeJob extends MemorySchedulerJob {
+public class LogTimeJob extends MemoryScheduledJob {
     private static final Logger LOG = LoggerFactory.getLogger(LogTimeJob.class);
 
     @Override

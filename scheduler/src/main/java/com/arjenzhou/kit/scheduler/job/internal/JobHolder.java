@@ -34,10 +34,10 @@ public class JobHolder {
                 load %s jobs:
                 %s
                 
-                When your service were not loaded properly, please check as follows:
-                1. whether your service is declared in /META-INF/services/com.arjenzhou.kit.scheduler.job.ScheduledJob
-                2. whether your service is annotated with com.arjenzhou.kit.scheduler.job.Scheduled
-                3. whether your service is provided as com.arjenzhou.kit.scheduler.job.ScheduledJob in module-info if you are using it under JPMS
+                When your services were not loaded properly, please check as follows:
+                1. whether your services are declared in /META-INF/services/com.arjenzhou.kit.scheduler.job.ScheduledJob
+                2. whether your services are annotated with com.arjenzhou.kit.scheduler.job.Scheduled
+                3. whether your services are provided as com.arjenzhou.kit.scheduler.job.ScheduledJob in module-info if you are using them under JPMS
                 """.formatted(SCHEDULED_JOBS.size(), loadedJobs));
     }
 
