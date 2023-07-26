@@ -2,7 +2,6 @@ package test.com.arjenzhou.kit.scheduler;
 
 import com.arjenzhou.kit.scheduler.SchedulerRunner;
 import org.junit.jupiter.api.Test;
-import org.quartz.SchedulerException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +11,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class SchedulerTest {
     @Test
-    public void test() throws SchedulerException, InterruptedException {
+    public void test() throws InterruptedException {
         SchedulerRunner.run();
-        TimeUnit.SECONDS.sleep(15);
+        TimeUnit.SECONDS.sleep(3);
+        SchedulerRunner.stop();
     }
 }
